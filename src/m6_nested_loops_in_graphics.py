@@ -83,7 +83,26 @@ def draw_L(window, circle, r, c):
     # TODO: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    radius = circle.radius
+    x = circle.center.x
+    y = circle.center.y
+    center = rg.Point(x, y)
 
+    for k in range(0, r + 3):
+        if k < r:
+            for j in range(3):
+                center.x = center.x + 2 * radius
+                new_circle = rg.Circle(center, radius)
+                new_circle.attach_to(window)
+                window.render()
+        else:
+            for j in range(c + 3):
+                center.x = center.x + 2 * radius
+                new_circle = rg.Circle(center, radius)
+                new_circle.attach_to(window)
+                window.render()
+        center.x = circle.center.x
+        center.y = center.y + 2 * radius
 
 def run_test_draw_wall_on_right():
     """ Tests the    draw_wall_on_right    function. """
@@ -124,7 +143,22 @@ def draw_wall_on_right(rectangle, n, window):
     # TODO: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    u_r_c = rectangle.get_upper_right_corner()
+    l_l_c = rectangle.get_lower_left_corner()
+    length = rectangle.get_width()
+    height = rectangle.get_height()
 
+    for k in range(1, n + 1):
+        for j in range(0, k):
+            u_r_c.x = u_r_c.x - length
+            l_l_c.x = l_l_c.x - length
+            new_rectangle = rg.Rectangle(u_r_c, l_l_c)
+            new_rectangle.attach_to(window)
+            window.render(0.1)
+        u_r_c.x = rectangle.get_upper_right_corner().x
+        l_l_c.x = rectangle.get_lower_left_corner().x
+        u_r_c.y = u_r_c.y + height
+        l_l_c.y = l_l_c.y + height
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
